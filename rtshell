@@ -1,0 +1,28 @@
+term.clear()
+term.setCursorPos(1,1)
+term.setTextColor(colors.red)
+term.write("        Ronnoc Technologies Operating System       ") 
+term.setCursorPos(1,2)
+local version = fs.open("rtos/version", "r")
+term.write("                       "..version.readAll().."                           ")
+term.setCursorPos(1,4)
+
+while true do
+  term.setTextColor(colors.lime)
+  write(shell.dir())
+  term.setTextColor(colors.white)
+  write("> ")
+  term.setTextColor(colors.orange)
+  local command = read()
+  if (command ~= "shell") then
+    if (command == "version") then
+      term.setTextColor(colors.white)
+      local version = fs.open("rtos/version", "r")
+      print(version.readAll())
+    else
+      term.setTextColor(colors.yellow)
+      print("Attempting to run: "..command)
+      shell.run(command)
+    end
+  end
+end

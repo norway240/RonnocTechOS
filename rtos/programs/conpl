@@ -1,0 +1,116 @@
+function Println(x,y)
+  term.setCursorPos(1,x)
+  term.write(y)
+end
+function PrintMenu()
+  Println(1, "X-------------------------------------------------X")
+  Println(2, "|RONNOC TECHNOLOGIES                              |")
+  Println(3, "|                HOME CONTROL PANEL               |")
+  Println(4, "|                                                 |")
+  Println(5, "|   WELCOME SIGN                                  |")
+  Println(6, "|                                                 |")
+  Println(7, "|   [CLEAR]                                       |")
+  Println(8, "|   [Msg 1]                                       |")
+  Println(9, "|   [Msg 2]                                       |")
+  Println(10, "|                                                 |")
+  Println(11, "|                                                 |")
+  Println(12, "|                                                 |")
+  Println(13, "|                                                 |")
+  Println(14, "|                                                 |")
+  Println(15, "|                                                 |")
+  Println(16, "|                                                 |")
+  Println(17, "|                                                 |")
+  Println(18, "|                                                 |")
+  Println(19, "X-------------------------------------------------X")
+end
+function welcome()
+  rednet.send(10,"welcome")
+  rednet.send(12,"welcome")
+  term.setCursorPos(5,7)
+  term.setBackgroundColor(colors.black)
+  write("[CLEAR]")
+  term.setCursorPos(5,9)
+  write("[Msg 2]")
+  term.setCursorPos(5,8)
+  term.setBackgroundColor(colors.green)
+  write("[Msg 1]")
+end
+function rt()
+  rednet.send(10,"rt")
+  rednet.send(12,"rt")
+  term.setCursorPos(5,7)
+  term.setBackgroundColor(colors.black)
+  write("[CLEAR]")
+  term.setCursorPos(5,8)
+  write("[Msg 1]")
+  term.setCursorPos(5,9)
+  term.setBackgroundColor(colors.green)
+  write("[Msg 2]")
+end
+function clear()
+  rednet.send(10,"clear")
+  rednet.send(12,"clear")
+  term.setCursorPos(5,8)
+  term.setBackgroundColor(colors.black)
+  write("[Msg 1]")
+  term.setCursorPos(5,9)
+  write("[Msg 2]")
+  term.setCursorPos(5,7)
+  term.setBackgroundColor(colors.green)
+  write("[CLEAR]")
+end
+
+
+-----------------------------------------------
+PrintMenu()
+while true do
+  rednet.open("left")
+  local _,type,x,y = os.pullEvent("mouse_click")
+  -- 5-11
+  -- welcome msg
+  if (y == 8) and (x == 5) then
+    welcome()
+  elseif (y == 8) and (x == 6) then
+    welcome()
+  elseif (y == 8) and (x == 7) then
+    welcome()
+  elseif (y == 8) and (x == 8) then
+    welcome()
+  elseif (y == 8) and (x == 9) then
+    welcome()
+  elseif (y == 8) and (x == 10) then
+    welcome()
+  elseif (y == 8) and (x == 11) then
+    welcome()
+  -- rt msg
+  elseif (y == 9) and (x == 5) then
+    rt()
+  elseif (y == 9) and (x == 6) then
+    rt()
+  elseif (y == 9) and (x == 7) then
+    rt()
+  elseif (y == 9) and (x == 8) then
+    rt()
+  elseif (y == 9) and (x == 9) then
+    rt()
+  elseif (y == 9) and (x == 10) then
+    rt()
+  elseif (y == 9) and (x == 11) then
+    rt()
+  -- clear msg 
+  elseif (y == 7) and (x == 5) then
+    clear()
+  elseif (y == 7) and (x == 6) then
+    clear()
+  elseif (y == 7) and (x == 7) then
+    clear()
+  elseif (y == 7) and (x == 8) then
+    clear()
+  elseif (y == 7) and (x == 9) then
+    clear()
+  elseif (y == 7) and (x == 10) then
+    clear()
+  elseif (y == 7) and (x == 11) then
+    clear()
+  end
+end
