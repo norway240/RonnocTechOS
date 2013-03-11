@@ -1,0 +1,9 @@
+print("Please Login")
+write("User: ")
+user = read()
+if fs.isDir(user) == false then
+  print("That user does not exist!")
+else
+  write("Pass: ")
+  pass = read()
+end
