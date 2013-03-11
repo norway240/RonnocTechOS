@@ -46,7 +46,7 @@ else
     else
       rtos.Println(1,18,"Logged In!")
 	  setcurruser(user)
-	  shell.run("/rtos/rtshell")
+	  shell.run("/rtos/rtgui")
 	end
   end
 end
