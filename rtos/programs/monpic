@@ -1,0 +1,14 @@
+local Args = { ... }
+local imgpath = Args[1]
+local side = Args[2]
+local img = paintutils.loadImage(imgpath)
+local mon = peripheral.wrap(side)
+if imgpath ~= nil then
+  if side ~= nil then
+    term.redirect(mon)
+    mon.setBackgroundColor(colors.black)
+    mon.clear()
+    paintutils.drawImage(img, 1,1)
+    term.restore()
+  end
+end

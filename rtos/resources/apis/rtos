@@ -1,3 +1,7 @@
 function test()
   print("test")
 end
+function Println(x,y,text)
+  term.setCursorPos(x,y)
+  term.write(text)
+end

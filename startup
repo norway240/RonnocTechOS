@@ -9,8 +9,10 @@ for i = 1,25 do
   sleep(0.05)
 end
 
-shell.run("monpic","rtos/resources/imgs/rtlogo","top")
+if peripheral.isPresent("top") then
+  shell.run("rtos/programs/monpic","rtos/resources/imgs/rtlogo","top")
+end
 paintutils.drawImage(logo,1,1)
 sleep(2)
---os.loadAPI("rtos/resources/apis/rtos")
+os.loadAPI("rtos/resources/apis/rtos")
 shell.run("rtos/users/login")
