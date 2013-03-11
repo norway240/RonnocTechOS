@@ -26,3 +26,47 @@ end
 
 PrintMenu()
 PrintVersion()
+
+function insideBox(x, y, px, px1, py, py1)
+  if x >= px and x <= px1 and y >= py and y <= py1 then
+    return true
+  else
+    return false
+  end
+end
+
+button = {}
+button.default = {px = 2, px1 = 9, py= 3, py1 = 11, text = "Default button", func = function() return true end}
+
+function addButton(name , upx, upx1, upy, upy1, utext, ufunc)
+  button[name] = {
+    px = upx,
+    px1 = upx1,
+    py = upy,
+    py1 = upy1,
+    text = utext,
+    func = ufunc
+  }
+end
+
+addButton("reboot", 2, 9, 3, 6, "Reboot", os.reboot)
+
+for k, v in pairs(button) do
+  term.setCursorPos(button[k].px, button[k].py)
+  print("O"..string.rep(button[k].px1-button[k].px-2, "-").."O")
+  for i = 1, button[k].py1-button[k].py-2 do
+    print("|"..string.rep(button[k].px1-button[k].px-2, " ").."|")
+  end
+  print("O"..string.rep(button[k].px-button[k].px1-2, "-").."O")
+  cX, cY = math.floor(button[k].px1-button[k].px/2)-math.floor(string.len(button[k].text)/2), math.floor(button[k].px1-button[k].px/2)
+end
+while true do
+  ev, p1, p2, p3 = os.pullEvent()
+  if ev == "mouse_click" and p1 == 1 then
+    for k, v in pairs(buttons) do
+      if insideBox(p2, p3, button[k].px, button[k].px1, button[k].py, button[k].py1) then
+	    button[k].func()
+	  end
+    end
+  end
+end
