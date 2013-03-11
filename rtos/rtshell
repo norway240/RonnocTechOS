@@ -21,7 +21,7 @@ while true do
       print(version.readAll())
     else
       term.setTextColor(colors.yellow)
-      print("Attempting to run: "..command)
+      --print("Attempting to run: "..command)
       shell.run(command)
     end
   end
