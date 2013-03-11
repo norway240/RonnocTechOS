@@ -1,0 +1,5 @@
+for k, v in pairs(fs.list("/rtos/resources/apis")) do
+--  print("Loading: "..v)
+  os.loadAPI("/rtos/resources/apis/"..v)
+--  print("API "..v.." loaded")
+end
