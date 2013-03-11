@@ -23,6 +23,10 @@ function PrintMenu()
   Println(1,18, "|                                                 |")
   Println(1,19, "X-------------------------------------------------X")
 end
+function PrintVersion()
+  local version = fs.open("rtos/version", "r")
+  Println(42,2,version.readAll())
+end
+
 PrintMenu()
-local version = fs.open("rtos/version", "r")
-Println(42,2,version.readAll())
+PrintVersion()
