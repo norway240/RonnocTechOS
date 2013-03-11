@@ -14,5 +14,8 @@ if peripheral.isPresent("top") then
 end
 paintutils.drawImage(logo,1,1)
 sleep(2)
-shell.run("rtos/boot/loadApis")
+--This Runs Boot Files
+for k, v in pairs(fs.list("rtos/boot")) do
+  shell.run("rtos/boot/"..v)
+end
 shell.run("rtos/users/login")
