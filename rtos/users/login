@@ -7,23 +7,46 @@ function setcurruser(user)
   curruser.close()
 end
 
+function clearlogin()
+  w,h = term.getSize()
+  for num = 1,w do
+    rtos.Println(num,15," ")
+	rtos.Println(num,16," ")
+	rtos.Println(num,17," ")
+	rtos.Println(num,18," ")
+  end
+  local logo = paintutils.loadImage("rtos/resources/imgs/rtlogo")
+  paintutils.drawImage(logo,1,1)
+end
+
 rtos.Println(1,15,"Please Login")
 rtos.Println(1,16,"User: ")
 local user = read()
 if fs.isDir("/rtos/users/"..user) == false then
   rtos.Println(1,17,"That user does not exist!")
-  shell.run("login")
+  sleep(3)
+  clearlogin()
+  shell.run("/rtos/users/login")
 else
-  local userpassget = fs.open("/rtos/users/"..user.."/pass", "r")
-  local userpass = userpassget.readAll()
-  rtos.Println(1,17,"Pass: ")
-  local pass = read("*")
-  if pass ~= userpass then
-    rtos.Println(1,18,"Wrong Password!")
-	   shell.run("/rtos/users/login")
+  if (user == nil) or (user == "") then
+    rtos.Println(1,17,"That user does not exist!")
+    sleep(3)
+    clearlogin()
+    shell.run("/rtos/users/login")
   else
-    rtos.Println(1,18,"Logged In!")
-	setcurruser(user)
-	shell.run("/rtos/rtshell")
+    local userpassget = fs.open("/rtos/users/"..user.."/pass", "r")
+    local userpass = userpassget.readAll()
+    rtos.Println(1,17,"Pass: ")
+    local pass = read("*")
+    if pass ~= userpass then
+      rtos.Println(1,18,"Wrong Password!")
+      sleep(3)
+      clearlogin()
+      shell.run("/rtos/users/login")
+    else
+      rtos.Println(1,18,"Logged In!")
+	  setcurruser(user)
+	  shell.run("/rtos/rtshell")
+	end
   end
 end
