@@ -7,22 +7,22 @@ function setcurruser(user)
   curruser.close()
 end
 
-write("Please Login")
-write("User: ")
+rtos.Println(1,15,"Please Login")
+rtos.Println(1,16,"User: ")
 local user = read()
 if fs.isDir("/rtos/users/"..user) == false then
-  write("That user does not exist!")
+  rtos.Println(1,17,"That user does not exist!")
   shell.run("login")
 else
   local userpassget = fs.open("/rtos/users/"..user.."/pass", "r")
   local userpass = userpassget.readAll()
-  write("Pass: ")
+  rtos.Println(1,17,"Pass: ")
   local pass = read("*")
   if pass ~= userpass then
-    write("Wrong Password!")
+    rtos.Println(1,18,"Wrong Password!")
 	   shell.run("/rtos/users/login")
   else
-    write("Logged In!")
+    rtos.Println(1,18,"Logged In!")
 	setcurruser(user)
 	shell.run("/rtos/rtshell")
   end
