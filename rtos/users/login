@@ -5,7 +5,6 @@ function setcurruser(user)
   local curruser = fs.open("/rtos/users/curruser","w")
   curruser.writeLine(user)
   curruser.close()
-  curruser.flush()
 end
 
 
