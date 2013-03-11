@@ -12,4 +12,5 @@ end
 shell.run("monpic","rtos/imgs/rtlogo","top")
 paintutils.drawImage(logo,1,1)
 sleep(5)
+os.loadAPI("rtos/lib/apis/rtos")
 shell.run("rtos/rtshell")
