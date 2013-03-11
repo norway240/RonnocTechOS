@@ -14,5 +14,5 @@ if peripheral.isPresent("top") then
 end
 paintutils.drawImage(logo,1,1)
 sleep(2)
-os.loadAPI("rtos/resources/apis/rtos")
+shell.run("rtos/boot/loadApis")
 shell.run("rtos/users/login")

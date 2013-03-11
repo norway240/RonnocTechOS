@@ -20,7 +20,7 @@ else
   local pass = read("*")
   if pass ~= userpass then
     write("Wrong Password!")
-	shell.run("login")
+	   shell.run("/rtos/users/login")
   else
     write("Logged In!")
 	setcurruser(user)
