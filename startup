@@ -1,15 +1,15 @@
-local logo = paintutils.loadImage("rtos/rtlogo")
-local os = paintutils.loadImage("rtos/rtos")
+local logo = paintutils.loadImage("rtos/imgs/rtlogo")
+local os = paintutils.loadImage("rtos/imgs/rtos")
 paintutils.drawImage(os,1,1)
 sleep(1)
 
 for i = 1,25 do
-  loadimg = paintutils.loadImage("rtos/rtosl/rtosl"..i)
+  loadimg = paintutils.loadImage("rtos/imgs/rtosl/rtosl"..i)
   paintutils.drawImage(loadimg, 1,1)
   sleep(0.25)
 end
 
-shell.run("monpic","rtos/rtlogo","top")
+shell.run("monpic","rtos/imgs/rtlogo","top")
 paintutils.drawImage(logo,1,1)
 sleep(5)
-shell.run("rtshell")
+shell.run("rtos/rtshell")
