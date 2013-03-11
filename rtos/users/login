@@ -1,16 +1,31 @@
+os.pullEvent = os.pullEventRaw
+
+function setcurruser(user)
+  fs.delete("/rtos/users/curruser")
+  local curruser = fs.open("/rtos/users/curruser","w")
+  curruser.writeLine(user)
+  curruser.close()
+  curruser.flush()
+end
+
+
 print("Please Login")
 write("User: ")
 local user = read()
 if fs.isDir("/rtos/users/"..user) == false then
   print("That user does not exist!")
+  shell.run("login")
 else
   local userpassget = fs.open("/rtos/users/"..user.."/pass", "r")
   local userpass = userpassget.readAll()
   write("Pass: ")
-  local pass = read()
+  local pass = read("*")
   if pass ~= userpass then
     print("Wrong Password!")
+	shell.run("login")
   else
     print("Logged In!")
+	setcurruser(user)
+	shell.run("/rtos/rtshell")
   end
 end

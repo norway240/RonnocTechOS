@@ -5,6 +5,9 @@ term.write("        Ronnoc Technologies Operating System       ")
 term.setCursorPos(1,2)
 local version = fs.open("rtos/version", "r")
 term.write("                       "..version.readAll().."                           ")
+term.setCursorPos(1,3)
+local user = fs.open("rtos/users/curruser", "r")
+term.write("                       "..user.readAll().."                           ")
 term.setCursorPos(1,4)
 
 while true do
