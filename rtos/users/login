@@ -25,8 +25,14 @@ local user = read()
 if not fs.isDir("/rtos/users/"..user) then
   rtos.Println(1,17,"That user does not exist!")
   sleep(3)
-  clearlogin()
-  shell.run("/rtos/users/login")
+  rtos.Println(1, 18, "Would you like to create a new user[y/n]?")
+  local accept = read()
+  if string.lower(accept) == "y" then
+    shell.run("/rtos/users/newuser")
+  else
+    clearlogin()
+    shell.run("/rtos/users/login")
+  end
 else
   if (not user) or (user == "") then
     rtos.Println(1,17,"That user does not exist!")
