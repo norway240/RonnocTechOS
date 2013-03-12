@@ -1,0 +1,28 @@
+local programs = {}
+
+function program.new(name, func, ground)
+  programs[name] = {}
+  programs[name].co = coroutine.create(func)
+  programs[name].ground = ground
+  programs[name].active = false
+end
+
+function program.terminate(name)
+  program[name] = nil
+end
+
+function shell.run(path)
+  f = fs.open(path)
+  program.new(path, loadstring(f.readAll(), true))
+end
+
+while true
+
+for k, v in pairs(programs) do
+  if not programs[k].active then
+    coroutine.resume(programs[name].co)
+    programs[name].active = true
+  end
+end
+
+end
