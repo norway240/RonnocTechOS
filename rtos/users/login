@@ -3,7 +3,7 @@ term.setBackgroundColor(colors.red)
 function setcurruser(user)
   fs.delete("/rtos/users/curruser")
   local curruser = fs.open("/rtos/users/curruser","w")
-  curruser.writeLine(user)
+  curruser.write(user)
   curruser.close()
 end
 
