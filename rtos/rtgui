@@ -55,7 +55,7 @@ for k, v in pairs(button) do
   term.setCursorPos(button[k].px, button[k].py)
   print("O"..string.rep(button[k].px1-button[k].px-2, "-").."O")
   for i = 1, button[k].py1-button[k].py-2 do
-    print("|"..string.rep(button[k].px1-button[k].px-2, " ").."|")
+    print("|"..string.rep(" ", button[k].px1-button[k].px-2).."|")
   end
   print("O"..string.rep(button[k].px-button[k].px1-2, "-").."O")
   cX, cY = math.floor(button[k].px1-button[k].px/2)-math.floor(string.len(button[k].text)/2), math.floor(button[k].px1-button[k].px/2)
@@ -63,7 +63,7 @@ end
 while true do
   ev, p1, p2, p3 = os.pullEvent()
   if ev == "mouse_click" and p1 == 1 then
-    for k, v in pairs(buttons) do
+    for k, v in pairs(button) do
       if insideBox(p2, p3, button[k].px, button[k].px1, button[k].py, button[k].py1) then
 	    button[k].func()
 	  end

@@ -9,6 +9,7 @@ term.setCursorPos(1,3)
 local user = fs.open("rtos/users/curruser", "r")
 term.write(user.readAll())
 term.setCursorPos(1,4)
+tCommandHistory = {}
 
 while true do
   term.setTextColor(colors.lime)
@@ -16,12 +17,14 @@ while true do
   term.setTextColor(colors.white)
   write("> ")
   term.setTextColor(colors.orange)
-  local command = read()
+  local command = read(nil, tCommandHistoy)
+  table.insert(tCommandHistory, command)
   if (command ~= "shell") then
     if (command == "version") then
       term.setTextColor(colors.white)
       local version = fs.open("rtos/version", "r")
       print(version.readAll())
+      version.close()
     else
       term.setTextColor(colors.yellow)
       --print("Attempting to run: "..command)
