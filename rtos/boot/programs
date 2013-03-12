@@ -16,7 +16,7 @@ function shell.run(path)
   program.new(path, loadstring(f.readAll(), true))
 end
 
-while true
+while true do
 
 for k, v in pairs(programs) do
   if not programs[k].active then
