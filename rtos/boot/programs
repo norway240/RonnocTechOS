@@ -1,4 +1,7 @@
+--[[
+UNDER HEAVY DEVELOPMENT NOT FOR USE
 local programs = {}
+program = {}
 
 function program.new(name, func, ground)
   programs[name] = {}
@@ -11,10 +14,11 @@ function program.terminate(name)
   program[name] = nil
 end
 
-function shell.run(path)
-  f = fs.open(path)
-  program.new(path, loadstring(f.readAll(), true))
-end
+--function shell.run(path)
+  --f = fs.open(path)
+  --program.new(path, loadstring(f.readAll(), true))
+  --f.close()
+--end
 
 while true do
 
@@ -24,5 +28,4 @@ for k, v in pairs(programs) do
     programs[name].active = true
   end
 end
-
 end
