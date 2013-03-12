@@ -46,8 +46,14 @@ else
     else
       rtos.Println(1,18,"Logged In!")
 	  setcurruser(user)
+	  sleep(0.5)
+	  term.write(".")
+	  sleep(0.5)
+	  term.write(".")
+	  sleep(0.5)
+	  term.write(".")
+	  sleep(0.5)
 	  term.setBackgroundColor(colors.black)
-	  sleep(3)
 	  shell.run("/rtos/rtshell")
 	end
   end
