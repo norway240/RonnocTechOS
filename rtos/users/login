@@ -47,7 +47,7 @@ else
       rtos.Println(1,18,"Logged In!")
 	  setcurruser(user)
 	  term.setBackgroundColor(colors.black)
-	  shell.run("/rtos/rtgui")
+	  shell.run("/rtos/rtshell")
 	end
   end
 end
