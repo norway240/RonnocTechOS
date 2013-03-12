@@ -25,7 +25,9 @@ while true do
       local version = fs.open("rtos/version", "r")
       print(version.readAll())
       version.close()
-    else
+      elseif fs.isExist("rtos/programs/"..command) and (not fs.isDir("rtos/programs/"..command)) then
+        shell.run("rtos/programs/"..command)
+      else
       term.setTextColor(colors.yellow)
       --print("Attempting to run: "..command)
       shell.run(command)

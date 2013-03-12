@@ -1,0 +1,19 @@
+function test()
+  print("test")
+end
+function Println(x,y,text)
+  term.setCursorPos(x,y)
+  term.write(text)
+end
+
+function inTable(t, val, bPos)
+  for k, v in pairs(t) do
+    if v == val then
+      if bPos then
+        return k, true
+      else
+        return false
+      end
+    end
+  end
+end
