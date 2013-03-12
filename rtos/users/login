@@ -22,13 +22,13 @@ end
 rtos.Println(1,15,"Please Login")
 rtos.Println(1,16,"User: ")
 local user = read()
-if fs.isDir("/rtos/users/"..user) == false then
+if not fs.isDir("/rtos/users/"..user) then
   rtos.Println(1,17,"That user does not exist!")
   sleep(3)
   clearlogin()
   shell.run("/rtos/users/login")
 else
-  if (user == nil) or (user == "") then
+  if (not user) or (user == "") then
     rtos.Println(1,17,"That user does not exist!")
     sleep(3)
     clearlogin()
@@ -36,9 +36,10 @@ else
   else
     local userpassget = fs.open("/rtos/users/"..user.."/pass", "r")
     local userpass = userpassget.readAll()
+    userpassget.close()
     rtos.Println(1,17,"Pass: ")
     local pass = read("*")
-    if pass ~= userpass then
+    if sha.hash(pass) ~= userpass then
       rtos.Println(1,18,"Wrong Password!")
       sleep(3)
       clearlogin()

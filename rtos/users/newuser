@@ -14,7 +14,7 @@ else
   if confirm == "y" then
     fs.makeDir("/rtos/users/"..newuser)
 	local newpassfile = fs.open("/rtos/users/"..newuser.."/pass", "w")
-	newpassfile.write(newpass)
+	newpassfile.write(sha.hash(newpass))
 	newpassfile.close()
     rtos.Println(1,10,"User Created!")
   elseif confirm == "n" then
