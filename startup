@@ -15,7 +15,7 @@ end
 paintutils.drawImage(logo,1,1)
 sleep(2)
 --This Runs Boot Files
-for k, v in pairs(fs.list("rtos/boot")) do
-  shell.run("rtos/boot/"..v)
+for k, v in pairs(fs.list("rtos/resources/boot")) do
+  shell.run("rtos/resources/boot/"..v)
 end
 shell.run("rtos/users/login")
