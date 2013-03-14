@@ -19,6 +19,7 @@ else
 	local newpassfile = fs.open("/rtos/users/"..newuser.."/pass", "w")
 	newpassfile.write(sha.hash(newpass))
 	newpassfile.close()
+        shell.run("/rtos/rtshell")
     rtos.Println(1,10,"User Created!")
   elseif confirm == "n" then
     rtos.Println(1,10,"Cancelled")
