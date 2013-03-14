@@ -10,6 +10,7 @@ local user = fs.open("rtos/users/curruser", "r")
 term.write(user.readAll())
 term.setCursorPos(1,4)
 tCommandHistory = {}
+tCommandHistory[1] = "Lolz"
 
 while true do
   term.setTextColor(colors.lime)
@@ -17,7 +18,7 @@ while true do
   term.setTextColor(colors.white)
   write("> ")
   term.setTextColor(colors.orange)
-  local command = read(nil, tCommandHistoy)
+  local command = read(nil, tCommandHistory)
   table.insert(tCommandHistory, command)
   if (command ~= "shell") then
     if (command == "version") then
