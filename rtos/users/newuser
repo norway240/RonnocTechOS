@@ -3,9 +3,9 @@ rtos.Println(1,1,"Creating a new user")
 rtos.Println(1,5,"New User: ")
 local newuser = read()
 rtos.Println(1,6,"New Pass: ")
-local newpass = read()
+local newpass = read("*")
 rtos.Println(1,7,"Confirm Pass: ")
-local confirmpass = read()
+local confirmpass = read("*")
 if newpass ~= confirmpass then
   rtos.Println(1,9,"The passwords do not match!")
 else
