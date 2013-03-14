@@ -1,3 +1,4 @@
+term.setBackgroundColor(colors.black)
 term.clear()
 rtos.Println(1,1,"Creating a new user")
 rtos.Println(1,5,"New User: ")
@@ -8,6 +9,8 @@ rtos.Println(1,7,"Confirm Pass: ")
 local confirmpass = read("*")
 if newpass ~= confirmpass then
   rtos.Println(1,9,"The passwords do not match!")
+  sleep(3)
+  shell.run("/rtos/users/newuser")
 else
   rtos.Println(1,9,"Are you sure? y/n: ")
   local confirm = read()
