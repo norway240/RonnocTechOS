@@ -17,3 +17,19 @@ function inTable(t, val, bPos)
     end
   end
 end
+
+function limitRead(len, char)
+  output = ""
+  if string.len(output) < len then
+    ev, p1 = os.pullEvent()
+    if ev == "char" then
+      output = output..p1
+      if char then
+        write(char)
+      else
+        write(p1)
+      end
+    end
+  end
+  return output
+end
