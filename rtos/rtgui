@@ -1,3 +1,4 @@
+term.setBackgroundColor(colors.black)
 local screen = {
   'X---------------------------------------------------------X',
   '|              RONNOC TECH OPERATING SYSTEM               |',
@@ -44,7 +45,7 @@ end
 
 local buttons = {}
 
-local buttons.add = function(name ,x, y, w, h, text, color, func)
+function buttons.add(name, x, y, w, h, text, color, func)
 	buttons[name] = {}
 	buttons[name].x = x
 	buttons[name].y = y
@@ -62,6 +63,7 @@ buttons["exit"].w = 6
 buttons["exit"].h = 3
 buttons["exit"].text = "EXIT"
 buttons["exit"].color = colors.red
+buttons["exit"].func = function() shell.run("/rtos/rtshell") end
 
 local running = true
 
@@ -83,15 +85,9 @@ while running do
 	if ev == "mouse_click" then
 		for k, v in pairs(buttons) do
 			if insideBox(p2, p3, buttons[k].x, buttons[k].x+buttons[k].w, buttons[k].y, buttons[k].y+buttons[k].h) then
-				if k ~= "exit" then
-					buttons[k].func()
-				else
-					running = false
-				end
+				buttons[k].func()
 			end
 		end
 	end
 end
-term.setBackgroundColor(colors.black)
-term.clear()
-term.setCursorPos(1,1)
+shell.run("/rtos/rtshell")
