@@ -44,12 +44,24 @@ end
 
 local buttons = {}
 
+local buttons.add = function(name ,x, y, w, h, text, color, func)
+	buttons[name] = {}
+	buttons[name].x = x
+	buttons[name].y = y
+	buttons[name].w = w
+	buttons[name].h = h
+	buttons[name].text = text
+	buttons[name].color = color
+	buttons[name].func = func
+end
+
 buttons["exit"] = {}
 buttons["exit"].x = 2
 buttons["exit"].y = 16
 buttons["exit"].w = 6
 buttons["exit"].h = 3
 buttons["exit"].text = "EXIT"
+buttons["exit"].color = colors.red
 
 local running = true
 
@@ -57,11 +69,12 @@ while running do
 	for k, v in pairs(buttons) do
 		if type(buttons[k]) == "table" then
 			term.setCursorPos(buttons[k].x, buttons[k].y)
-			print("X"..string.rep("-", buttons[k].w-2).."X")
+			term.setBackgroundColor(buttons["exit"].color)
+			print(string.rep(" ", buttons[k].w))
 			for i = 1, buttons[k].h-2 do
-				rtosterm.Println(buttons[k].x, buttons[k].y+i,"|"..string.rep(" ", buttons[k].w-2).."|")
+				rtosterm.Println(buttons[k].x, buttons[k].y+i, string.rep(" ", buttons[k].w))
 			end
-			rtosterm.Println(buttons[k].x, buttons[k].y+buttons[k].h-1, "X"..string.rep("-", buttons[k].w-2).."X")
+			rtosterm.Println(buttons[k].x, buttons[k].y+buttons[k].h-1, string.rep(" ", buttons[k].w))
 			term.setCursorPos(buttons[k].x+1, buttons[k].y+1)
 			write(buttons[k].text)
 		end
@@ -79,5 +92,6 @@ while running do
 		end
 	end
 end
+term.setBackgroundColor(colors.black)
 term.clear()
 term.setCursorPos(1,1)
