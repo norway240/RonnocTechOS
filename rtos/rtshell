@@ -30,7 +30,7 @@ while true do
       term.setTextColor(colors.yellow)
       --print("Attempting to run: "..command)
 	  if fs.exists("rtos/programs/"..command) and (not fs.isDir("rtos/programs/"..command)) then
-		shell.run("rtos/programs/"..command)
+  		 shell.run("rtos/programs/"..command)
 	  else
 		shell.run(command)
 	  end

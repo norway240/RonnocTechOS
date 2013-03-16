@@ -5,3 +5,7 @@ function Println(x,y,text)
   term.setCursorPos(x,y)
   term.write(text)
 end
+
+local v = fs.open("rtos/version", "r")
+version = v[1]
+v.close()
