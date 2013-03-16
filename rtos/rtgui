@@ -1,33 +1,40 @@
-function PrintMenu()
-  rtos.Println(1,1, "X-------------------------------------------------X")
-  rtos.Println(1,2, "|RONNOC TECHNOLOGIES OS                           |")
-  rtos.Println(1,3, "|                                                 |")
-  rtos.Println(1,4, "|                                                 |")
-  rtos.Println(1,5, "|                                                 |")
-  rtos.Println(1,6, "|                                                 |")
-  rtos.Println(1,7, "|                                                 |")
-  rtos.Println(1,8, "|                                                 |")
-  rtos.Println(1,9, "|                                                 |")
-  rtos.Println(1,10, "|                                                 |")
-  rtos.Println(1,11, "|                                                 |")
-  rtos.Println(1,12, "|                                                 |")
-  rtos.Println(1,13, "|                                                 |")
-  rtos.Println(1,14, "|                                                 |")
-  rtos.Println(1,15, "|                                                 |")
-  rtos.Println(1,16, "|                                                 |")
-  rtos.Println(1,17, "|                                                 |")
-  rtos.Println(1,18, "|                                                 |")
-  rtos.Println(1,19, "X-------------------------------------------------X")
+local screen = {
+  'X---------------------------------------------------------X',
+  '|              RONNOC TECH OPERATING SYSTEM               |',
+  '|                                                         |',
+  '|                                                         |',
+  '|                                                         |',
+  '|                                                         |',
+  '|                                                         |',
+  '|                                                         |',
+  '|                                                         |',
+  '|                                                         |',
+  '|                                                         |',
+  '|                                                         |',
+  '|                                                         |',
+  '|                                                         |',
+  '|                                                         |',
+  '|                                                         |',
+  '|                                                         |',
+  '|                                                         |',
+  'X---------------------------------------------------------X';
+}
+
+local function PrintMenu()
+	for k, v in pairs(screen) do
+		rtosterm.Println(1, k, v)
+	end
 end
-function PrintVersion()
+  
+local function PrintVersion()
   local version = fs.open("rtos/version", "r")
-  rtos.Println(42,2,version.readAll())
+  rtos.Println(26,3,version.readAll())
 end
 
 PrintMenu()
 PrintVersion()
 
-function insideBox(x, y, px, px1, py, py1)
+local function insideBox(x, y, px, px1, py, py1)
   if x >= px and x <= px1 and y >= py and y <= py1 then
     return true
   else
@@ -35,38 +42,42 @@ function insideBox(x, y, px, px1, py, py1)
   end
 end
 
-button = {}
-button.default = {px = 2, px1 = 9, py= 3, py1 = 11, text = "Default button", func = function() return true end}
+local buttons = {}
 
-function addButton(name , upx, upx1, upy, upy1, utext, ufunc)
-  button[name] = {
-    px = upx,
-    px1 = upx1,
-    py = upy,
-    py1 = upy1,
-    text = utext,
-    func = ufunc
-  }
-end
+buttons["exit"] = {}
+buttons["exit"].x = 2
+buttons["exit"].y = 16
+buttons["exit"].w = 6
+buttons["exit"].h = 3
+buttons["exit"].text = "EXIT"
 
-addButton("reboot", 2, 9, 3, 6, "Reboot", os.reboot)
+local running = true
 
-for k, v in pairs(button) do
-  term.setCursorPos(button[k].px, button[k].py)
-  print("O"..string.rep(button[k].px1-button[k].px-2, "-").."O")
-  for i = 1, button[k].py1-button[k].py-2 do
-    print("|"..string.rep(" ", button[k].px1-button[k].px-2).."|")
-  end
-  print("O"..string.rep(button[k].px-button[k].px1-2, "-").."O")
-  cX, cY = math.floor(button[k].px1-button[k].px/2)-math.floor(string.len(button[k].text)/2), math.floor(button[k].px1-button[k].px/2)
+while running do
+	for k, v in pairs(buttons) do
+		if type(buttons[k]) == "table" then
+			term.setCursorPos(buttons[k].x, buttons[k].y)
+			print("X"..string.rep("-", buttons[k].w-2).."X")
+			for i = 1, buttons[k].h-2 do
+				rtosterm.Println(buttons[k].x, buttons[k].y+i,"|"..string.rep(" ", buttons[k].w-2).."|")
+			end
+			rtosterm.Println(buttons[k].x, buttons[k].y+buttons[k].h-1, "X"..string.rep("-", buttons[k].w-2).."X")
+			term.setCursorPos(buttons[k].x+1, buttons[k].y+1)
+			write(buttons[k].text)
+		end
+	end
+	ev, p1, p2, p3 = os.pullEvent()
+	if ev == "mouse_click" then
+		for k, v in pairs(buttons) do
+			if insideBox(p2, p3, buttons[k].x, buttons[k].x+buttons[k].w, buttons[k].y, buttons[k].y+buttons[k].h) then
+				if k ~= "exit" then
+					buttons[k].func()
+				else
+					running = false
+				end
+			end
+		end
+	end
 end
-while true do
-  ev, p1, p2, p3 = os.pullEvent()
-  if ev == "mouse_click" and p1 == 1 then
-    for k, v in pairs(button) do
-      if insideBox(p2, p3, button[k].px, button[k].px1, button[k].py, button[k].py1) then
-	    button[k].func()
-	  end
-    end
-  end
-end
+term.clear()
+term.setCursorPos(1,1)
