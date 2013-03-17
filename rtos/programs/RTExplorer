@@ -1,3 +1,4 @@
+
 local rootDir = "/"
 local showHiddenFile = false
 local currentDir = rootDir
@@ -62,8 +63,6 @@ while running do
 		end
 		term.write(files[i].name)
 	end
-	
-	--running = false
 	
 	ev, p1, p2, p3 = os.pullEvent()
 	if ev == "mouse_click" then
