@@ -1,4 +1,3 @@
-
 term.setBackgroundColor(colors.black)
 local screen = {
   'X--------------------------------------------------------X',
@@ -24,7 +23,7 @@ local screen = {
 
 local function PrintMenu()
 	for k, v in pairs(screen) do
-		rtosterm.Println(1, k, v)
+		rtterm.Println(1, k, v)
 	end
 end
   
