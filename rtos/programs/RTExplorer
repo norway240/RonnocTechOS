@@ -82,7 +82,7 @@ while running do
 				end
 			elseif insideBox(p2, p3, files[i].x, files[i].xMax, files[i].y, files[i].y) and p1 == 2 then
 				if not files[i].isDir then
-					shell.run("/rtos/programs/TACO", currentDir..files[i].name)
+					shell.run("edit", currentDir..files[i].name)	--You Earned a COOKIE!
 					bg()
 				end
 			end
