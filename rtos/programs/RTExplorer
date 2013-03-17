@@ -2,14 +2,16 @@ local rootDir = "/"
 local showHiddenFile = false
 local currentDir = rootDir
 local running = true
+local bodyColor = colors.blue
+local outlineColor = colors.orange
 term.clear()
 local w, h = term.getSize()
 
 local function bg()
-	term.setBackgroundColor(colors.yellow)
+	term.setBackgroundColor(bodyColor)
 	term.clear()
 	term.setCursorPos(1,1)
-	term.setBackgroundColor(colors.black)
+	term.setBackgroundColor(outlineColor)
 	term.write(string.rep(" ", w))
 	term.setCursorPos(1, 3)
 	term.write(string.rep(" ", w))
@@ -34,7 +36,7 @@ end
 bg()
 
 while running do
-	term.setBackgroundColor(colors.yellow)
+	term.setBackgroundColor(bodyColro)
 	term.setCursorPos(3, 2)
 	term.write(currentDir)
 	
@@ -80,6 +82,7 @@ while running do
 			elseif insideBox(p2, p3, files[i].x, files[i].xMax, files[i].y, files[i].y) and p1 == 2 then
 				if not files[i].isDir then
 					shell.run("/rtos/programs/TACO", currentDir..files[i].name)
+					bg()
 				end
 			end
 		end
