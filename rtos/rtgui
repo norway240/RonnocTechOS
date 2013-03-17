@@ -56,14 +56,7 @@ function buttons.add(name, x, y, w, h, text, color, func)
 	buttons[name].func = func
 end
 
-buttons["exit"] = {}
-buttons["exit"].x = 2
-buttons["exit"].y = 16
-buttons["exit"].w = 6
-buttons["exit"].h = 3
-buttons["exit"].text = "EXIT"
-buttons["exit"].color = colors.red
-buttons["exit"].func = function() shell.run("/rtos/rtshell") end
+buttons.add("exit", 2, 16, 7, 3, "SHELL", colors.red, function() shell.run("/rtos/rtshell") end)
 
 local running = true
 
