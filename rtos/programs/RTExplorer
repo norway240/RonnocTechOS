@@ -71,6 +71,8 @@ while running do
 				if files[i].isDir then
 					currentDir = currentDir..files[i].name.."/"
 					bg()
+				elseif not files[i].isDir then
+					shell.run(currentDir..files[i].name)
 				end
 			elseif insideBox(p2, p3, files[i].x, files[i].xMax, files[i].y, files[i].y) and p1 == 2 then
 				if not files[i].isDir then
@@ -90,5 +92,4 @@ while running do
 	
 end
 term.setBackgroundColor(colors.black)
-term.clear()
-term.setCursorPos(1,1)
+shell.run("/rtos/rtgui")
