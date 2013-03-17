@@ -1,0 +1,98 @@
+local rootDir = "/"
+local showHiddenFile = false
+local currentDir = rootDir
+local running = true
+term.clear()
+local w, h = term.getSize()
+
+local function bg()
+	term.setBackgroundColor(colors.yellow)
+	term.clear()
+	term.setCursorPos(1,1)
+	term.setBackgroundColor(colors.black)
+	term.write(string.rep(" ", w))
+	term.setCursorPos(1, 3)
+	term.write(string.rep(" ", w))
+	for i = 1, h do
+		term.setCursorPos(1, i)
+		term.write(" ")
+		term.setCursorPos(w, i)
+		term.write(" ")
+	end
+	term.setCursorPos(1, h)
+	term.write(string.rep(" ", w))
+end
+
+local function insideBox(x, y, px, px1, py, py1)
+  if x >= px and x <= px1 and y >= py and y <= py1 then
+    return true
+  else
+    return false
+  end
+end
+
+bg()
+
+while running do
+	term.setBackgroundColor(colors.yellow)
+	term.setCursorPos(3, 2)
+	term.write(currentDir)
+	
+	files = fs.list(currentDir)
+	
+	for i = 1, #files do
+		local name = files[i]
+		files[i] = {}
+		files[i].x = 3
+		files[i].xMax = files[i].x+string.len(name)-1
+		files[i].y = i+3
+		files[i].name = name
+		files[i].isDir = fs.isDir(currentDir..name)
+	end
+	
+	for i = 1, #files do
+		term.setCursorPos(files[i].x, files[i].y)
+		if files[i].isDir then
+			term.setTextColor(colors.cyan)
+		else
+			term.setTextColor(colors.lime)
+		end
+		term.write(files[i].name)
+	end
+	
+	--running = false
+	
+	ev, p1, p2, p3 = os.pullEvent()
+	if ev == "mouse_click" then
+		for i = 1, #files do
+			if insideBox(p2, p3, files[i].x, files[i].xMax, files[i].y, files[i].y) and p1 == 1 then
+				if files[i].isDir then
+					currentDir = currentDir..files[i].name.."/"
+					bg()
+				end
+			elseif p3 == 2 then
+				term.setCursorPos(2, 2)
+				local folder = read()
+				if fs.isDir(folder) then
+					currentDir = folder
+					bg()
+				end
+			elseif insideBox(p2, p3, files[i].x, files[i].xMax, files[i].y, files[i].y) and p1 == 2 then
+				if not files[i].isDir then
+					shell.run("/rtos/programs/TACO", currentDir..files[i].name)
+				end
+			end
+		end
+		elseif ev == "key" then
+		if  p1 == keys.backspace then
+			currentDir = "/"
+			bg()
+		elseif p1 == keys.q or p1 == keys.x then
+			running = false
+		end
+	end
+	
+end
+term.setBackgroundColor(colors.black)
+term.clear()
+term.setCursorPos(1,1)
