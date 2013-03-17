@@ -35,6 +35,7 @@ while true do
 	  else
 		shell.run(command)
 	  end
+	  term.setBackgroundColor(colors.black)
     end
   end
 end
