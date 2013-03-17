@@ -73,13 +73,6 @@ while running do
 					currentDir = currentDir..files[i].name.."/"
 					bg()
 				end
-			elseif p3 == 2 then
-				term.setCursorPos(2, 2)
-				local folder = read()
-				if fs.isDir(folder) then
-					currentDir = folder
-					bg()
-				end
 			elseif insideBox(p2, p3, files[i].x, files[i].xMax, files[i].y, files[i].y) and p1 == 2 then
 				if not files[i].isDir then
 					shell.run("edit", currentDir..files[i].name)	--You Earned a COOKIE!

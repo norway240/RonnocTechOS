@@ -56,8 +56,22 @@ function buttons.add(name, x, y, w, h, text, color, func)
 	buttons[name].func = func
 end
 
-buttons.add("exit", 2, 16, 7, 3, "SHELL", colors.red, function() shell.run("/rtos/rtshell") end)
-buttons.add("Explorer", 2, 3, 10, 3, "EXPLORER", colors.lime, function() shell.run("/rtos/programs/RTExplorer") end)
+buttons.add("exit", 2, 16, 7, 3, "shell", colors.red, function() shell.run("/rtos/rtshell") end)
+buttons.add("Explorer", 2, 3, 10, 3, "explorer", colors.lime, function()
+	shell.setDir("/")
+	os.queueEvent("char", "R")
+	os.queueEvent("char", "T")
+	os.queueEvent("char", "E")
+	os.queueEvent("char", "x")
+	os.queueEvent("char", "p")
+	os.queueEvent("char", "l")
+	os.queueEvent("char", "o")
+	os.queueEvent("char", "r")
+	os.queueEvent("char", "e")
+	os.queueEvent("char", "r")
+	os.queueEvent("key", keys.enter)
+	shell.run("/rtos/rtshell")
+end)
 
 local running = true
 
