@@ -51,12 +51,13 @@ function buttons.add(name, x, y, w, h, text, color, func)
 	buttons[name].y = y
 	buttons[name].w = w
 	buttons[name].h = h
-	buttons[name].text = text
+	buttons[name].text = string.upper(text)
 	buttons[name].color = color
 	buttons[name].func = func
 end
 
 buttons.add("exit", 2, 16, 7, 3, "SHELL", colors.red, function() shell.run("/rtos/rtshell") end)
+buttons.add("Explorer", 2, 3, 10, 3, "EXPLORER", colors.lime, function() shell.run("/rtos/programs/RTExplorer") end)
 
 local running = true
 
