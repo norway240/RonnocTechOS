@@ -36,7 +36,8 @@ end
 bg()
 
 while running do
-	term.setBackgroundColor(bodyColro)
+	term.setBackgroundColor(bodyColor)
+	--Did you know kittens are adorable
 	term.setCursorPos(3, 2)
 	term.write(currentDir)
 	
