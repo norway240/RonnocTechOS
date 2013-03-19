@@ -1,0 +1,25 @@
+local currversion = fs.open("/rtos/version","r")
+local newestversion = http.get("http://www.bloccrew.com/servers/minecraft/modserver/RonnocTechOS/version")
+local currbuild = fs.open("/rtos/build","r")
+local newestbuild = http.get("http://www.bloccrew.com/servers/minecraft/modserver/RonnocTechOS/build")
+local cv = currversion.readAll() 
+local nv = newestversion.readAll()
+local cb = tonumber(currbuild.readAll())
+local nb = tonumber(newestbuild.readAll())
+currversion.close()
+currbuild.close()
+
+term.setBackgroundColor(colors.red)
+
+rtos.Println(1,15,"Your Version: "..cv)
+rtos.Println(1,16,"Newest Version: "..nv)
+
+if cb<nb then
+  rtos.Println(1,18,"There is a new version out!")
+elseif cb==nb then
+  rtos.Println(1,18,"You are up to date!")
+elseif cb>nb then
+  rtos.Println(1,18,"You are running an unreleased version!")
+end
+sleep(5)
+shell.run("rtos/users/login")

@@ -1,5 +1,8 @@
 os.pullEvent = os.pullEventRaw
 term.setBackgroundColor(colors.red)
+term.clear()
+local logo = paintutils.loadImage("rtos/resources/imgs/rtlogo")
+paintutils.drawImage(logo,1,1)
 function setcurruser(user)
   fs.delete("/rtos/users/curruser")
   local curruser = fs.open("/rtos/users/curruser","w")
@@ -15,10 +18,9 @@ function clearlogin()
 	rtos.Println(num,17," ")
 	rtos.Println(num,18," ")
   end
-  local logo = paintutils.loadImage("rtos/resources/imgs/rtlogo")
   paintutils.drawImage(logo,1,1)
 end
-
+term.setBackgroundColor(colors.red)
 rtos.Println(1,15,"Please Login")
 rtos.Println(1,16,"User: ")
 local user = read()
@@ -53,7 +55,7 @@ else
     else
       rtos.Println(1,18,"Logged In!")
 	  setcurruser(user)
-  sleep(0.5)
+	  sleep(0.5)
 	  term.write(".")
 	  sleep(0.5)
 	  term.write(".")
@@ -61,7 +63,7 @@ else
 	  term.write(".")
 	  sleep(0.5)
 	  term.setBackgroundColor(colors.black)
-	  shell.run("/rtos/rtgui")
+	  shell.run("/rtos/rtshell")
 	end
   end
 end

@@ -20,4 +20,4 @@ sleep(2)
 for k, v in pairs(fs.list("rtos/resources/boot")) do
 shell.run("rtos/resources/boot/"..v)
 end
-shell.run("rtos/users/login")
+shell.run("/rtos/update")
