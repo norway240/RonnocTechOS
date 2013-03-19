@@ -11,7 +11,7 @@ currbuild.close()
 
 term.setBackgroundColor(colors.red)
 
-rtos.Println(1,15,"Your Version: "..cv)
+rtos.Println(1,15,"Your Version:   "..cv)
 rtos.Println(1,16,"Newest Version: "..nv)
 
 if cb<nb then
