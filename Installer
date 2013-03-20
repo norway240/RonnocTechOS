@@ -1,0 +1,13 @@
+local extractName = math.random(487354137584, 99343244321340028437246583674857001753865)
+local extractorID = "461hnYHf"
+
+shell.run("pastebin get", extractorID, extractorName)
+shell.run("pastebin get 6q5Dx6Dj RTOS.COMPRESSED")
+shell.run(extractorName, "RTOS.COMPRESSED", "/tmp/rtos.tmpfiles")
+shell.run("rm", extractorName)
+
+for f in fs.list("/tmp/rtos.tmpfiles") do
+  shell.run("cp /tmp/rtos.tmpfiles/"..f.." /")
+end
+shell.run("rm tmp")
+os.reboot()
