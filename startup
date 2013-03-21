@@ -6,18 +6,17 @@ paintutils.drawImage(os,1,1)
 sleep(0.05)
 
 for i = 1,25 do
-loadimg = paintutils.loadImage("rtos/resources/imgs/rtosl/rtosl"..i)
-paintutils.drawImage(loadimg, 1,1)
-sleep(0.05)
+  loadimg = paintutils.loadImage("rtos/resources/imgs/rtosl/rtosl"..i)
+  paintutils.drawImage(loadimg, 1,1)
+  sleep(0.05)
 end
 
 if peripheral.isPresent("top") then
-shell.run("rtos/programs/monpic","rtos/resources/imgs/rtlogo","top")
+  shell.run("rtos/programs/monpic","rtos/resources/imgs/rtlogo","top")
 end
 paintutils.drawImage(logo,1,1)
 sleep(2)
---This Runs Boot Files
+shell.run("/rtos/update") --"All of them at once I suppose"
 for k, v in pairs(fs.list("rtos/resources/boot")) do
-shell.run("rtos/resources/boot/"..v)
+  shell.run("rtos/resources/boot/"..v)
 end
-shell.run("/rtos/update")
