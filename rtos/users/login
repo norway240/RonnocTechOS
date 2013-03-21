@@ -13,21 +13,23 @@ end
 function clearlogin()
   w,h = term.getSize()
   for num = 1,w do
-    rtos.Println(num,15," ")
-	rtos.Println(num,16," ")
-	rtos.Println(num,17," ")
-	rtos.Println(num,18," ")
+    rtterm.Println(num,15," ")
+	 rtterm.Println(num,16," ")
+	 rtterm.Println(num,17," ")
+	 rtterm.Println(num,18," ")
   end
   paintutils.drawImage(logo,1,1)
 end
+
 term.setBackgroundColor(colors.red)
-rtos.Println(1,15,"Please Login")
-rtos.Println(1,16,"User: ")
+rtterm.Println(1,15,"Please Login")
+rtterm.Println(1,16,"User: ")
+
 local user = read()
 if not fs.isDir("/rtos/users/"..user) then
-  rtos.Println(1,17,"That user does not exist!")
+  rtterm.Println(1,17,"That user does not exist!")
   sleep(3)
-  rtos.Println(1, 18, "Would you like to create a new user[y/n]?")
+  rtterm.Println(1, 18, "Would you like to create a new user[y/n]?")
   local accept = read()
   if string.lower(accept) == "y" then
     shell.run("/rtos/users/newuser")
@@ -37,7 +39,7 @@ if not fs.isDir("/rtos/users/"..user) then
   end
 else
   if (not user) or (user == "") then
-    rtos.Println(1,17,"That user does not exist!")
+    rtterm.Println(1,17,"That user does not exist!")
     sleep(3)
     clearlogin()
     shell.run("/rtos/users/login")
@@ -45,15 +47,15 @@ else
     local userpassget = fs.open("/rtos/users/"..user.."/pass", "r")
     local userpass = userpassget.readAll()
     userpassget.close()
-    rtos.Println(1,17,"Pass: ")
+    rtterm.Println(1,17,"Pass: ")
     local pass = read("*")
     if sha.hash(pass) ~= userpass then
-      rtos.Println(1,18,"Wrong Password!")
+      rtterm.Println(1,18,"Wrong Password!")
       sleep(3)
       clearlogin()
       shell.run("/rtos/users/login")
     else
-      rtos.Println(1,18,"Logged In!")
+      rtterm.Println(1,18,"Logged In!")
 	  setcurruser(user)
 	  sleep(0.5)
 	  term.write(".")
