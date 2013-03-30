@@ -1,0 +1,5 @@
+function typeWord(s)
+	for c in string.gmatch(s)
+		os.queueEvent("char", s)
+	end
+end
