@@ -10,6 +10,7 @@ for i = 1,25 do
   paintutils.drawImage(loadimg, 1,1)
   sleep(0.05)
 end
+loadimg = nil
 
 if peripheral.isPresent("top") then
   shell.run("rtos/programs/monpic","rtos/resources/imgs/rtlogo","top")
@@ -20,3 +21,5 @@ shell.run("/rtos/update") --"All of them at once I suppose"
 for k, v in pairs(fs.list("rtos/resources/boot")) do
   shell.run("rtos/resources/boot/"..v)
 end
+
+shell.run("/rtos/users/login")
