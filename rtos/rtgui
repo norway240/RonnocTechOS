@@ -29,7 +29,7 @@ end
   
 local function PrintVersion()
   local version = fs.open("rtos/version", "r")
-  rtos.Println(26,3,version.readAll())
+  rtterm.Println(26,3,version.readAll())
 end
 
 PrintMenu()
@@ -56,21 +56,9 @@ function buttons.add(name, x, y, w, h, text, color, func)
 	buttons[name].func = func
 end
 
-buttons.add("exit", 2, 16, 7, 3, "shell", colors.red, function() shell.run("/rtos/rtshell") end)
+--buttons.add("exit", 2, 16, 7, 3, "shell", colors.red, function() shell.run("/rtos/rtshell") end)
 buttons.add("Explorer", 2, 3, 10, 3, "explorer", colors.lime, function()
-	shell.setDir("/")
-	os.queueEvent("char", "R")
-	os.queueEvent("char", "T")
-	os.queueEvent("char", "E")
-	os.queueEvent("char", "x")
-	os.queueEvent("char", "p")
-	os.queueEvent("char", "l")
-	os.queueEvent("char", "o")
-	os.queueEvent("char", "r")
-	os.queueEvent("char", "e")
-	os.queueEvent("char", "r")
-	os.queueEvent("key", keys.enter)
-	shell.run("/rtos/rtshell")
+	shell.run("/rtos/programs/RTExplorer")
 end)
 
 local running = true
@@ -79,12 +67,12 @@ while running do
 	for k, v in pairs(buttons) do
 		if type(buttons[k]) == "table" then
 			term.setCursorPos(buttons[k].x, buttons[k].y)
-			term.setBackgroundColor(buttons["exit"].color)
+			term.setBackgroundColor(buttons[k].color)
 			print(string.rep(" ", buttons[k].w))
 			for i = 1, buttons[k].h-2 do
-				rtosterm.Println(buttons[k].x, buttons[k].y+i, string.rep(" ", buttons[k].w))
+				rtterm.Println(buttons[k].x, buttons[k].y+i, string.rep(" ", buttons[k].w))
 			end
-			rtosterm.Println(buttons[k].x, buttons[k].y+buttons[k].h-1, string.rep(" ", buttons[k].w))
+			rtterm.Println(buttons[k].x, buttons[k].y+buttons[k].h-1, string.rep(" ", buttons[k].w))
 			term.setCursorPos(buttons[k].x+1, buttons[k].y+1)
 			write(buttons[k].text)
 		end
